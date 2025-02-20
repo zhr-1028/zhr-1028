@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>我的技术与生活——使用labelimg制作训练集，YOLOv11模型训练得到权重文件及PyQt6图像化界面开发。实现物品自动识别及统计信息 | zhr&#39;s blog</title>
+  <title>我的技术与生活——我的Pytorch框架学习三阶段 | zhr&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" href="/imgs/shortcut-icon.ico" type="image/x-icon">
   <link rel="stylesheet" href="/css/public.css" />
@@ -16,7 +16,7 @@
 
   <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
   <script>
-    document.title = `我的技术与生活——使用labelimg制作训练集，YOLOv11模型训练得到权重文件及PyQt6图像化界面开发。实现物品自动识别及统计信息`
+    document.title = `我的技术与生活——我的Pytorch框架学习三阶段`
   </script>
 <meta name="generator" content="Hexo 7.3.0"></head>
 
@@ -351,7 +351,7 @@
 
 <div class="article-container">
   <div class="article">
-    <h1 class="article-title">使用labelimg制作训练集，YOLOv11模型训练得到权重文件及PyQt6图像化界面开发。实现物品自动识别及统计信息</h1>
+    <h1 class="article-title">我的Pytorch框架学习三阶段</h1>
     <div class="article-info">
       <div class="article-info--item">
         <div class="article-info--info">
@@ -367,253 +367,25 @@
             
           </div>
           
-          <p class="article-info--date">日期：2025-02-11 19:52:04</p>
+          <p class="article-info--date">日期：2025-02-20 17:09:59</p>
         </div>
         <img src="/imgs/default-cover.webp" alt="" class="article-cover">
       </div>
     </div>
     <article class="article-content markdown-body">
       <hr>
-<p>date: 2025-02-11 19:52:04<br>tags:<br>-相关内容</p>
-<h2 id="一，使用labelimg制作数据集"><a href="#一，使用labelimg制作数据集" class="headerlink" title="一，使用labelimg制作数据集"></a>一，使用labelimg制作数据集</h2><p>1.anoconda虚拟环境下使用 <code>pip install labelimg </code>安装labelimg工具输入labelimg打开软件，接下来可以对图片进行标志并生成相关格式标签文件</p>
-<p>2.数据集文件夹包含以下3类文件<br><img src="/../image/7.png"></p>
-<p>class相关类名<br>image文件夹里是划分好的train集和val集<br>lable文件夹里也是划分好的train集和val集</p>
-<h2 id="二，YOLOv11训练模型"><a href="#二，YOLOv11训练模型" class="headerlink" title="二，YOLOv11训练模型"></a>二，YOLOv11训练模型</h2><p>1.可以anoconda搭载好环境包含ultralytics,python版本不能较老，集安装好pytorch,电脑有gpu可以下gpu版本训练快很多<br>1.在github官网下载对应版本ultralytics及yolov11n.pt文件<br>用pycharm等打开ultralytics项目</p>
-<p>2.yaml中填写好相关路径<br><img src="/../image/8.png"></p>
-<p>3.创建train.py文件写训练代码如<br><img src="/../image/9.png"></p>
-<p>4.运行代码，等待训练结束<br>生成的runs文件夹里含训练出的模型权重文件best.pt</p>
-<h2 id="三，PyQt6开发界面及编写代码"><a href="#三，PyQt6开发界面及编写代码" class="headerlink" title="三，PyQt6开发界面及编写代码"></a>三，PyQt6开发界面及编写代码</h2><p>1.搭载好pyqt6及pyqt6-tools环境</p>
-<p>2.打开QTdesiger设计<br>包含两个pushButton组件分别实现文件上传功能及电脑摄像头开关功能<br>objectName分别为uploadButton，cameraButton（代码中会引用这些属性）<br>一个Qtextedit组件objectName：statusTextEdit来呈现统计信息<br>一个Qlabel组件，objectName：resultLabel展示图片或视频标注结果<br>可用一些设计美化界面<br><img src="/../image/10.png"></p>
-<h2 id="四，代码"><a href="#四，代码" class="headerlink" title="四，代码"></a>四，代码</h2><p>1.所需相关模块<br>import sys ：sys.argv：用于获取命令行参数，在 QApplication(sys.argv) 中，将命令行参数传递给 QApplication<br>sys.exit(app.exec())：用于在应用程序结束时退出 Python 解释器</p>
-<p>import cv2 ：cv2.VideoCapture：用于打开视频文件或摄像头设备，如 cv2.VideoCapture(self.file_path) 用于打开视频文件，cv2.VideoCapture(0) 用于打开默认摄像头。<br>cap.read()：从视频文件或摄像头中读取一帧图像。</p>
-<p>from ultralytics import YOLO ：self.model &#x3D; YOLO(‘best.pt’) 加载了YOLO 模型，对图像和视频帧进行目标检测，如 results &#x3D; self.model(frame)。</p>
-<p>from PyQt6 import uic：加载 QtDesigner 创建的 UI 文件。在代码中，uic.loadUi(‘task3.ui’, self) 加载名为 task3.ui 的 UI 文件到 MainWindow 类中。</p>
-<p>from PyQt6.QtWidgets import QApplication, QWidget, QFileDialog<br>QApplication：应用程序的控制和设置<br>QWidget：用于创建自定义的窗口界面，MainWindow类继承自QWidget<br>QFileDialog：实现打开文件功能，连接pushbutton</p>
-<p>from PyQt6.QtGui import QPixmap, QImage<br>QPixmap:显示图像 （QLabel）<br>QImage:处理和操作图像数据</p>
-<p>from PyQt6.QtCore import QThread, pyqtSignal<br>QThread：QThread 创建多线程，我创建了VideoThread 和 CameraThread ，继承于QThread，在后台处理视频和摄像头数据。<br> pyqtSignal：不同线程之间传递信号，frame_processed &#x3D; pyqtSignal(object, object) 定义了一个信号，用于传递处理后的帧和统计信息。</p>
-<p> from PyQt6.QtCore import QResource：运行二进制资源文件，<br> 我使用了.qrc文件提供图片，<code>$ &quot;相关路径\Lib\site-packages\qt6_applications\Qt\bin\rcc.exe&quot; &quot;-binary&quot; &quot;1.qrc&quot; &quot;-o&quot; &quot;1.rcc&quot;</code>命令把.qrc编译成二进制<br>  <code>QResource.registerResource(&#39;.rcc&#39;)</code>代码实现图片展示功能</p>
-<p>2.相关类<br>VideoThread<br>pythonclass VideoThread(QThread):<br>    frame_processed &#x3D; pyqtSignal(object, object)<br>    def <strong>init</strong>(self, file_path, model):<br>        …<br>    def reset_counts(self):<br>        …<br>    def run(self):<br>        …<br>    def stop(self):<br>        …<br>继承自 QThread，用于在后台处理视频文件。其主要功能包括：<br>初始化时接收视频文件路径和 YOLO 模型。<br>run 方法会逐帧读取视频文件，使用 YOLO 模型进行目标检测，统计目标数量，并通过 frame_processed 信号将处理后的帧和统计信息发送出去。<br>stop 方法用于停止线程的运行。<br>CameraThread<br>class CameraThread(QThread):<br>    frame_processed &#x3D; pyqtSignal(object, object)<br>    def <strong>init</strong>(self, model):<br>        …<br>    def reset_counts(self):<br>        …<br>    def run(self):<br>        …<br>    def stop(self):<br>        …<br>继承自 QThread，用于处理摄像头的实时视频流</p>
-<p>run 方法会逐帧读取视频文件，使用 YOLO 模型进行目标检测，统计目标数量，并通过 frame_processed 信号将处理后的帧和统计信息发送出去。<br>stop 方法用于停止线程的运行</p>
-<p>3.主窗口class MainWindow(QWidget):<br>def <strong>init</strong>(self):<br>        …</p>
-<p>def openfile(self):<br>        …</p>
-<p>def process_image(self, file_path):<br>        …</p>
-<p>def process_video(self, file_path):<br>        …</p>
-<p>def update_frame(self, annotated_frame, status_text):<br>        …</p>
-<p>def toggle_camera(self):<br>        …</p>
-<p>def closeEvent(self, event):<br>        …<br>继承自 QWidget：<strong>init</strong> 方法：加载 UI 连接按钮的点击事件<br>openfile方法：打开文件选择界面<br>process_image 方法：对用户选择的图像文件进行目标检测，将检测结果显示在界面上，并更新统计信息。<br>process_video 方法：停止之前的视频处理线程和摄像头线程，创建并启动新的视频处理线程。<br>update_frame方法：接收处理后的帧和统计信息：切换摄像头的启动和停止状态<br>closeEvent 方法：在关闭窗口时停止所有正在运行的线程。</p>
-<p>4.主程序<br>if <strong>name</strong> &#x3D;&#x3D; ‘<strong>main</strong>‘:<br>    app &#x3D; QApplication(sys.argv)<br>    window &#x3D; MainWindow()<br>    window.show()<br>    sys.exit(app.exec())</p>
-<h2 id="五，功能展示"><a href="#五，功能展示" class="headerlink" title="五，功能展示"></a>五，功能展示</h2><p><img src="/../image/11.png" alt="一些文件"></p>
-<p><img src="/../image/12.png" alt="一些文件"></p>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre><code class="import">import warnings
-import cv2
-from PyQt6 import uic
-from PyQt6.QtWidgets import QApplication, QWidget, QFileDialog
-from PyQt6.QtGui import QPixmap, QImage
-from PyQt6.QtCore import QThread, pyqtSignal
-from ultralytics import YOLO
-from PyQt6.QtCore import QResource
-warnings.filterwarnings(&quot;ignore&quot;, category=DeprecationWarning)  # 忽略警告
-
-class VideoThread(QThread):
-    frame_processed = pyqtSignal(object, object)  # 信号：传递处理后的帧和统计信息
-    def __init__(self, file_path, model):
-        super().__init__()
-        self.file_path = file_path
-        self.model = model
-        self.reset_counts()
-        self.running = True
-
-    def reset_counts(self):
-        #重置目标数量统计信息
-        self.class_counts = &#123;&#125;
-
-    def run(self):
-        self.reset_counts()
-        cap = cv2.VideoCapture(self.file_path)
-        if not cap.isOpened():
-            print(&quot;Failed to open video file&quot;)
-            return
-        while self.running:
-            ret, frame = cap.read()
-            if not ret:
-                break
-
-            results = self.model(frame)
-            annotated_frame = results[0].plot()  # 绘制检测结果
-            # 目标统计
-            class_names = results[0].names
-            self.class_counts = &#123;&#125;  # 重置统计信息
-            for cls in results[0].boxes.cls.cpu().numpy():
-                cls_name = class_names[int(cls)]
-                if cls_name in self.class_counts:
-                    self.class_counts[cls_name] += 1
-                else:
-                    self.class_counts[cls_name] = 1
-            status_text = &quot;\n&quot;.join([f&quot;&#123;name&#125;: &#123;count&#125;&quot; for name, count in self.class_counts.items()])
-
-            self.frame_processed.emit(annotated_frame, status_text)  # 发送处理后的帧和统计信息
-            self.msleep(30)  # 每 30 毫秒处理一帧
-
-        cap.release()
-
-    def stop(self):
-        self.running = False
-        self.wait()
-
-
-class CameraThread(QThread):
-    frame_processed = pyqtSignal(object, object)  # 信号：传递处理后的帧和统计信息
-
-    def __init__(self, model):
-        super().__init__()
-        self.model = model
-        self.reset_counts()
-        self.running = True
-
-    def reset_counts(self):
-        self.class_counts = &#123;&#125;
-
-    def run(self):
-        self.reset_counts()
-        cap = cv2.VideoCapture(0)
-        if not cap.isOpened():
-            print(&quot;Failed to open camera&quot;)
-            return
-        print(&quot;Camera opened successfully&quot;)
-        while self.running:
-            ret, frame = cap.read()
-            if not ret:
-                break
-
-            results = self.model(frame)
-            annotated_frame = results[0].plot()  # 绘制检测结果
-            class_names = results[0].names
-            self.class_counts = &#123;&#125;  # 重置统计信息
-            for cls in results[0].boxes.cls.cpu().numpy():
-                cls_name = class_names[int(cls)]
-                if cls_name in self.class_counts:
-                    self.class_counts[cls_name] += 1
-                else:
-                    self.class_counts[cls_name] = 1
-            status_text = &quot;\n&quot;.join([f&quot;&#123;name&#125;: &#123;count&#125;&quot; for name, count in self.class_counts.items()])
-
-            self.frame_processed.emit(annotated_frame, status_text)  # 发送处理后的帧和统计信息
-            self.msleep(30)  # 每 30 毫秒处理一帧
-        cap.release()
-
-    def stop(self):
-        self.running = False
-        self.wait()
-
-
-class MainWindow(QWidget):
-    def __init__(self):
-        super().__init__()
-        uic.loadUi(&#39;task3.ui&#39;, self)# 加载 UI 文件
-        self.model = YOLO(&#39;best.pt&#39;)
-        self.uploadButton.clicked.connect(self.openfile)
-        self.cameraButton.clicked.connect(self.toggle_camera)  # 新增摄像头按钮点击事件
-        self.video_thread = None  # 视频处理线程
-        self.camera_thread = None  # 摄像头处理线程
-        self.camera_running = False  # 摄像头是否正在运行的标志
-
-    def openfile(self):
-        if self.camera_thread and self.camera_running:
-            self.toggle_camera()  # 停止摄像头
-        file_path, _ = QFileDialog.getOpenFileName(self, &#39;选择文件&#39;, &#39;&#39;,
-                                                   &#39;图片和视频文件 (*.jpg *.png *.mp4 *.webp *.wmv *.bmp *.jpeg *.gif *.avi *.mkv *.flv *.rmvb *.tiff *.mov *.m4v *.3gp *.jfif *.heic)&#39;)
-        if file_path:
-            # 定义图片文件扩展名元组，添加新的扩展名
-            image_extensions = (&#39;.jpg&#39;, &#39;.png&#39;, &#39;.webp&#39;, &#39;.bmp&#39;, &#39;.jpeg&#39;, &#39;.gif&#39;, &#39;.tiff&#39;, &#39;.jfif&#39;, &#39;.heic&#39;)
-            # 定义视频文件扩展名元组，添加新的扩展名
-            video_extensions = (&#39;.mp4&#39;, &#39;.wmv&#39;, &#39;.avi&#39;, &#39;.mkv&#39;, &#39;.flv&#39;, &#39;.rmvb&#39;, &#39;.mov&#39;, &#39;.m4v&#39;, &#39;.3gp&#39;)
-            if file_path.lower().endswith(image_extensions):
-                self.process_image(file_path)
-            elif file_path.lower().endswith(video_extensions):
-                self.process_video(file_path)
-
-    def process_image(self, file_path):
-        results = self.model(file_path)
-        annotated_frame = results[0].plot()
-        height, width, channel = annotated_frame.shape
-        bytes_per_line = 3 * width
-        q_img = QImage(annotated_frame.data, width, height, bytes_per_line, QImage.Format.Format_BGR888)
-        pixmap = QPixmap.fromImage(q_img)
-        self.resultLabel.setPixmap(pixmap.scaled(self.resultLabel.width(), self.resultLabel.height()))
-
-        class_names = results[0].names  # 统计信息
-        class_counts = &#123;&#125;
-        for cls in results[0].boxes.cls.cpu().numpy():
-            cls_name = class_names[int(cls)]
-            if cls_name in class_counts:
-                class_counts[cls_name] += 1
-            else:
-                class_counts[cls_name] = 1
-        status_text = &quot;\n&quot;.join([f&quot;&#123;name&#125;: &#123;count&#125;&quot; for name, count in class_counts.items()])
-        self.statusTextEdit.setPlainText(status_text)
-
-    def process_video(self, file_path):
-        if self.video_thread:
-            self.video_thread.stop()  # 停止上一个线程
-        if self.camera_thread and self.camera_running:
-            self.toggle_camera()  # 停止摄像头
-
-        # 创建并启动视频处理线程
-        self.video_thread = VideoThread(file_path, self.model)
-        self.video_thread.frame_processed.connect(self.update_frame)
-        self.video_thread.start()
-
-    def update_frame(self, annotated_frame, status_text):
-        try:
-            height, width, channel = annotated_frame.shape# 将 OpenCV 帧转换为 QImage
-            bytes_per_line = 3 * width
-            q_img = QImage(annotated_frame.data, width, height, bytes_per_line, QImage.Format.Format_BGR888)
-            pixmap = QPixmap.fromImage(q_img)  # 将 QImage 转换为 QPixmap 并显示
-            if pixmap.isNull():
-                print(&quot;Pixmap is null!&quot;)
-            else:
-                self.resultLabel.setPixmap(pixmap.scaled(self.resultLabel.width(), self.resultLabel.height()))
-            self.statusTextEdit.setPlainText(status_text)
-        except Exception as e:
-            print(f&quot;Error updating frame: &#123;e&#125;&quot;)
-
-    def toggle_camera(self):
-        if self.camera_running:
-            # 停止摄像头
-            self.camera_thread.stop()
-            self.camera_thread = None
-            self.camera_running = False
-            self.cameraButton.setText(&quot;启动摄像头&quot;)
-        else:
-            # 启动摄像头
-            if self.video_thread:
-                self.video_thread.stop()  # 停止视频处理线程
-            self.camera_thread = CameraThread(self.model)
-            self.camera_thread.frame_processed.connect(self.update_frame)
-            self.camera_thread.start()
-            self.camera_running = True
-            self.cameraButton.setText(&quot;停止摄像头&quot;)
-
-    def closeEvent(self, event):     #关闭窗口时停止所有线程
-        if self.video_thread:
-            self.video_thread.stop()
-        if self.camera_thread:
-            self.camera_thread.stop()
-        event.accept()
-
-if __name__ == &#39;__main__&#39;:
-    app = QApplication(sys.argv)
-    window = MainWindow()
-    QResource.registerResource(&#39;1.rcc&#39;)
-    window.show()
-    sys.exit(app.exec())```
-</code></pre>
+<p>date: 2025-02-20 19:19:40<br>tags: pytorch</p>
+<h2 id="一，数据集类，数据加载器类的使用"><a href="#一，数据集类，数据加载器类的使用" class="headerlink" title="一，数据集类，数据加载器类的使用"></a>一，数据集类，数据加载器类的使用</h2><p>1.pytorch中数据加载方法<br>batch:数据打乱顺序，组成一波一波的数据，批量处理<br>epoch:拿所有的数据训练一次<br>2.Dataset基类，数据集类<br>1.torch.utils.data.Dataset调用<br>2.有两个重要的方法：<br>a.<em>getitem</em>(index):能够对实例进行索引<br>b.<em>len</em>:len(实例)调用实例的__len__方法<br>3.迭代数据集，使用<br>torch.utils.data.DataLoader(dataset,batch_size,shuffle)<br>以下是代码实现过程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">from torch.utils.data import Dataset,DataLoader</span><br><span class="line"></span><br><span class="line">class SmsDataset(Dataset):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.file_path = &quot;./data/SMSSpamCollection&quot;</span><br><span class="line">        self.lines  = open(self.file_path).readlines()</span><br><span class="line"></span><br><span class="line">    def __getitem__(self, index):</span><br><span class="line">        line = self.lines[index].strip()</span><br><span class="line">        label = line.split(&quot;\t&quot;)[0]</span><br><span class="line">        content = line.split(&quot;\t&quot;)[1]</span><br><span class="line">        return label,content</span><br><span class="line"></span><br><span class="line">    def __len__(self):</span><br><span class="line">        return len(self.lines)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#使用DataLoader</span><br><span class="line">sms_dataset = SmsDataset()</span><br><span class="line"># print(sms_dataset[0])</span><br><span class="line">dataloader = DataLoader(sms_dataset,batch_size=2,shuffle=True,drop_last=True)</span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    for idx,(labels,contents) in enumerate(dataloader):</span><br><span class="line">        print(idx)</span><br><span class="line">        print(labels)</span><br><span class="line">        print(contents)</span><br><span class="line">        break</span><br><span class="line">    print(len(sms_dataset))</span><br><span class="line">    print(len(dataloader))</span><br></pre></td></tr></table></figure>
+<h2 id="二-数字识别项目的学习"><a href="#二-数字识别项目的学习" class="headerlink" title="二.数字识别项目的学习"></a>二.数字识别项目的学习</h2><p>1.大致流程:手写数字识别的思路：<br>准备数据，通过dataset和DataLoader准备<br>模型构建<br>模型训练，模型保存和加载<br>模型的评估<br>2.准备Mnist数据<br>torchvision.transforms.ToTensor<br>把ndarray转化为tensor<br>&amp;<br>PIL中iamge对象对转化为tensor方法<br>torchvision.transforms.Normlize(mean,str)<br>&amp;<br>mean,std的形状和通道数相同<br>torchvision.transforms.Compose<br>2.代码实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">#使用pytorch完成手写数字的识别</span><br><span class="line">import os</span><br><span class="line">import torch</span><br><span class="line">from torch.utils.data import DataLoader</span><br><span class="line">from torch.optim import Adam</span><br><span class="line">from mpmath.identification import transforms</span><br><span class="line">from torchvision.datasets import MNIST</span><br><span class="line">from torchvision.transforms import Compose,ToTensor,Normalize</span><br><span class="line">import torch.nn as nn</span><br><span class="line">import torch.nn.functional as F</span><br><span class="line">BATCH_SIZE=128</span><br><span class="line">#1准备数据集</span><br><span class="line">def get_dataloader(train=True):</span><br><span class="line">    transform_fn =Compose([</span><br><span class="line">        ToTensor(),</span><br><span class="line">        Normalize(mean=(0.1307),std=(0.3081,))  #mean和std形状和通道数一样</span><br><span class="line">    ])</span><br><span class="line">    dataset=MNIST(root=&quot;./data&quot;,train=train,transform=transform_fn)</span><br><span class="line">    data_loader=DataLoader(dataset,batch_size=BATCH_SIZE,shuffle=True)</span><br><span class="line">    return  data_loader</span><br><span class="line"></span><br><span class="line">#2,构建模型</span><br><span class="line">class MistMOdel(nn.Module):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super(MistMOdel,self).__init__()</span><br><span class="line">        self.fc1=nn.Linear(1*28*28,28)</span><br><span class="line">        self.fc2=nn.Linear(28,10)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    def forward(self,input):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :param input: [batch_size,1,28,28]</span><br><span class="line">        :return:</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        x=input.view([input.size(0),1*28*28])#形状修改</span><br><span class="line">        x=self.fcl(x)  #全连接操作</span><br><span class="line">        x=F.relu(x)  #进行激活函数处理，形状不变</span><br><span class="line">        out=self.fc2(x) #输出层</span><br><span class="line">        return out</span><br><span class="line">        return F.log_softmax(out,dim=-1)</span><br><span class="line"></span><br><span class="line">model=MistMOdel()</span><br><span class="line"></span><br><span class="line">optimizer=Adam(model.parameters(),lr=0.001)</span><br><span class="line">if os.path.exists(&quot;./&quot;):</span><br><span class="line">    model.load_state_dict(torch.load(&quot;./路径&quot;))</span><br><span class="line">    optimizer.load_state_dict(torch.load(&quot;./路径&quot;))</span><br><span class="line"></span><br><span class="line">def train(epoch):  #模型的训练</span><br><span class="line"></span><br><span class="line">    data_loader=get_dataloader()</span><br><span class="line">    for idx,(inout,traget) in enumerate(data_loader):</span><br><span class="line">        output=model(input)   #调用模型的到预测值</span><br><span class="line">        loss=F.nll_loss(output,traget)</span><br><span class="line">        loss.backward()#反向传播</span><br><span class="line">        optimizer.step()#提督更新</span><br><span class="line">        if idx%100==0:</span><br><span class="line">            print(epoch,idx,loss.item())</span><br><span class="line"></span><br><span class="line">        #模型的保存</span><br><span class="line">        if idx%100==0:</span><br><span class="line">            torch.save(model.state_dict(),&quot;./路径&quot;)</span><br><span class="line">            torch.save(optimizer.state_dict(), &quot;./路径&quot;)</span><br><span class="line"></span><br><span class="line">def test():</span><br><span class="line">    test_dataloader=get_dataloader(train=False)</span><br><span class="line">    for idx,(inout,traget) in enumerate(test_dataloader):</span><br><span class="line">        with torch.no_grad:</span><br><span class="line">            output=model(input)</span><br><span class="line">            cur_loss=F.nll_loss(output,traget)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ ==  &#x27;__main__&#x27;:</span><br><span class="line">    #for i in range(3):#训练3轮</span><br><span class="line">       # train(i)</span><br><span class="line">    loader=get_dataloader(train=False)</span><br><span class="line">    for input,label in loader:</span><br><span class="line">        print(label.siae())</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="三-循环神经网络的基础了解"><a href="#三-循环神经网络的基础了解" class="headerlink" title="三.循环神经网络的基础了解"></a>三.循环神经网络的基础了解</h2><p>RNN:具有短期记忆的网络<br>1.和普通网络的区别<br>能够更擅长解决时间序列问题<br>当前时刻神经元的输入有两个：<br>当前时刻的输入<br>前一时刻的输出<br>2.RNN的常见类别<br>one-one:图像分类<br>one-many:图像描述<br>many-one:文本的分类<br>many-many:翻译<br>3.RNN的长依赖：带预测词语的位置比较远，很难影响到当前时间步的输出<br>4.LSTM:解决长依赖<br>ell state:细胞状态，存储的是记忆信息<br>遗忘门：决定什么信息会被忘记<br>输入门：把信息输入到cell state中<br>输出门：决定什么信息会被输出</p>
 
     </article>
     
     <div class="read-nums">
       <!-- id 将作为查询条件 -->
-      <span id="2025/02/11/训练集制作，YOLOv11模型训练及PyQt6图像化界面开发/" class="leancloud_visitors" data-flag-title="Your Article Title">
+      <span id="2025/02/20/Pytorch框架学习三阶段/" class="leancloud_visitors" data-flag-title="Your Article Title">
         <em class="post-meta-item-text">浏览量</em>
         <i class="leancloud-visitors-count"></i>
       </span>
@@ -629,20 +401,20 @@ if __name__ == &#39;__main__&#39;:
     <div class="article-catelogue--wrapper">
       <div class="catelogue catelogue-1">
         <h3>目录</h3>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%EF%BC%8C%E4%BD%BF%E7%94%A8labelimg%E5%88%B6%E4%BD%9C%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">一，使用labelimg制作数据集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%EF%BC%8CYOLOv11%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">二，YOLOv11训练模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%EF%BC%8CPyQt6%E5%BC%80%E5%8F%91%E7%95%8C%E9%9D%A2%E5%8F%8A%E7%BC%96%E5%86%99%E4%BB%A3%E7%A0%81"><span class="toc-number">3.</span> <span class="toc-text">三，PyQt6开发界面及编写代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%EF%BC%8C%E4%BB%A3%E7%A0%81"><span class="toc-number">4.</span> <span class="toc-text">四，代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%EF%BC%8C%E5%8A%9F%E8%83%BD%E5%B1%95%E7%A4%BA"><span class="toc-number">5.</span> <span class="toc-text">五，功能展示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="toc-number">6.</span> <span class="toc-text">完整代码</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%EF%BC%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E7%B1%BB%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">一，数据集类，数据加载器类的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.</span> <span class="toc-text">二.数字识别项目的学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BA%86%E8%A7%A3"><span class="toc-number">3.</span> <span class="toc-text">三.循环神经网络的基础了解</span></a></li></ol>
       </div>
       
         <div class="catelogue catelogue-2">
           
             <p>
               <span>上一篇：</span>
-              <a href="/2025/02/20/Pytorch框架学习一阶段/">我的Pytorch框架学习一阶段</a>
+              <a href="/2025/02/20/Web前端的相关学习一阶段/">通过Web前端（html, css, javascripte）相关学习，设计并完成了一个简单的关于家乡介绍的网页界面</a>
             </p>
            
           
             <p>
               <span>下一篇</span>
-              <a href="/2025/01/25/hexo框架搭建个人博客并部署到github/">如何利用hexo框架在github上搭建个人博客</a>
+              <a href="/2025/02/20/Pytorch框架学习二阶段/">我的Pytorch框架学习二阶段</a>
             </p>
           
         </div>
@@ -664,7 +436,7 @@ if __name__ == &#39;__main__&#39;:
     recordIP: config.recordIP,
     visitor: config.visitor,
     enableQQ: config.enableQQ,
-    path: '2025/02/11/训练集制作，YOLOv11模型训练及PyQt6图像化界面开发/'
+    path: '2025/02/20/Pytorch框架学习三阶段/'
   })
 </script>
 
