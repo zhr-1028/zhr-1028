@@ -193,7 +193,7 @@
   const ipt = document.querySelector('#search-input')
   const btn = document.querySelector('#search-btn')
   const layer = document.querySelector('#search-layer')
-  const posts = JSON.parse(`[{"title":"我的Pytorch框架学习一阶段","path":"2025/02/20/Pytorch框架学习一阶段/"},{"title":"我的Pytorch框架学习二阶段","path":"2025/02/20/Pytorch框架学习二阶段/"},{"title":"Web前端开发相关工具的使用，配置","path":"2025/02/20/Web学习二阶段/"},{"title":"如何利用hexo框架在github上搭建个人博客","path":"2025/01/25/hexo框架搭建个人博客并部署到github/"},{"title":"Hello World","path":"2025/01/25/hello-world/"},{"title":"使用labelimg制作训练集，YOLOv11模型训练得到权重文件及PyQt6图像化界面开发。实现物品自动识别及统计信息","path":"2025/02/11/训练集制作，YOLOv11模型训练及PyQt6图像化界面开发/"},{"title":"我的Pytorch框架学习三阶段","path":"2025/02/20/Pytorch框架学习三阶段/"},{"title":"通过Web前端（html, css, javascripte）相关学习，设计并完成了一个简单的关于家乡介绍的网页界面","path":"2025/02/20/Web前端的相关学习一阶段/"}]`)
+  const posts = JSON.parse(`[{"title":"我的Pytorch框架学习一阶段","path":"2025/02/20/Pytorch框架学习一阶段/"},{"title":"我的Pytorch框架学习三阶段","path":"2025/02/20/Pytorch框架学习三阶段/"},{"title":"我的Pytorch框架学习二阶段","path":"2025/02/20/Pytorch框架学习二阶段/"},{"title":"Web前端开发相关工具的使用，配置","path":"2025/02/20/Web学习二阶段/"},{"title":"通过Web前端（html, css, javascripte）相关学习，设计并完成了一个简单的关于家乡介绍的网页界面","path":"2025/02/20/Web前端的相关学习一阶段/"},{"title":"如何利用hexo框架在github上搭建个人博客","path":"2025/01/25/hexo框架搭建个人博客并部署到github/"},{"title":"使用labelimg制作训练集，YOLOv11模型训练得到权重文件及PyQt6图像化界面开发。实现物品自动识别及统计信息","path":"2025/02/11/训练集制作，YOLOv11模型训练及PyQt6图像化界面开发/"},{"title":"Hello World","path":"2025/01/25/hello-world/"}]`)
   ipt.addEventListener('keyup', e => {
     if (e.key === 'Enter') {
       handleSearch()
@@ -335,7 +335,7 @@
       </p>
       <p class="main-left--subtitle">
         <span>上线时间：</span>
-        <span>71天</span>
+        <span>72天</span>
       </p>
       <p class="main-left--subtitle">
         <span>当前版本：</span>
@@ -376,14 +376,14 @@
       <hr>
 <p>date: 2025-02-11 19:52:04<br>tags:<br>-相关内容</p>
 <h2 id="一，使用labelimg制作数据集"><a href="#一，使用labelimg制作数据集" class="headerlink" title="一，使用labelimg制作数据集"></a>一，使用labelimg制作数据集</h2><p>1.anoconda虚拟环境下使用 <code>pip install labelimg </code>安装labelimg工具输入labelimg打开软件，接下来可以对图片进行标志并生成相关格式标签文件</p>
-<p>2.数据集文件夹包含以下3类文件<br><img src="/../image/7.png"></p>
+<p>2.数据集文件夹包含以下3类文件<br><img src="https://blogphotos-1339074592.cos.ap-singapore.myqcloud.com/7.png"></p>
 <p>class相关类名<br>image文件夹里是划分好的train集和val集<br>lable文件夹里也是划分好的train集和val集</p>
 <h2 id="二，YOLOv11训练模型"><a href="#二，YOLOv11训练模型" class="headerlink" title="二，YOLOv11训练模型"></a>二，YOLOv11训练模型</h2><p>1.可以anoconda搭载好环境包含ultralytics,python版本不能较老，集安装好pytorch,电脑有gpu可以下gpu版本训练快很多<br>1.在github官网下载对应版本ultralytics及yolov11n.pt文件<br>用pycharm等打开ultralytics项目</p>
-<p>2.yaml中填写好相关路径<br><img src="/../image/8.png"></p>
-<p>3.创建train.py文件写训练代码如<br><img src="/../image/9.png"></p>
+<p>2.yaml中填写好相关路径<br><img src="https://blogphotos-1339074592.cos.ap-singapore.myqcloud.com/8.png"></p>
+<p>3.创建train.py文件写训练代码如<br><img src="https://blogphotos-1339074592.cos.ap-singapore.myqcloud.com/9.png"></p>
 <p>4.运行代码，等待训练结束<br>生成的runs文件夹里含训练出的模型权重文件best.pt</p>
 <h2 id="三，PyQt6开发界面及编写代码"><a href="#三，PyQt6开发界面及编写代码" class="headerlink" title="三，PyQt6开发界面及编写代码"></a>三，PyQt6开发界面及编写代码</h2><p>1.搭载好pyqt6及pyqt6-tools环境</p>
-<p>2.打开QTdesiger设计<br>包含两个pushButton组件分别实现文件上传功能及电脑摄像头开关功能<br>objectName分别为uploadButton，cameraButton（代码中会引用这些属性）<br>一个Qtextedit组件objectName：statusTextEdit来呈现统计信息<br>一个Qlabel组件，objectName：resultLabel展示图片或视频标注结果<br>可用一些设计美化界面<br><img src="/../image/10.png"></p>
+<p>2.打开QTdesiger设计<br>包含两个pushButton组件分别实现文件上传功能及电脑摄像头开关功能<br>objectName分别为uploadButton，cameraButton（代码中会引用这些属性）<br>一个Qtextedit组件objectName：statusTextEdit来呈现统计信息<br>一个Qlabel组件，objectName：resultLabel展示图片或视频标注结果<br>可用一些设计美化界面<br><img src="https://blogphotos-1339074592.cos.ap-singapore.myqcloud.com/10.png"></p>
 <h2 id="四，代码"><a href="#四，代码" class="headerlink" title="四，代码"></a>四，代码</h2><p>1.所需相关模块<br>import sys ：sys.argv：用于获取命令行参数，在 QApplication(sys.argv) 中，将命令行参数传递给 QApplication<br>sys.exit(app.exec())：用于在应用程序结束时退出 Python 解释器</p>
 <p>import cv2 ：cv2.VideoCapture：用于打开视频文件或摄像头设备，如 cv2.VideoCapture(self.file_path) 用于打开视频文件，cv2.VideoCapture(0) 用于打开默认摄像头。<br>cap.read()：从视频文件或摄像头中读取一帧图像。</p>
 <p>from ultralytics import YOLO ：self.model &#x3D; YOLO(‘best.pt’) 加载了YOLO 模型，对图像和视频帧进行目标检测，如 results &#x3D; self.model(frame)。</p>
@@ -402,8 +402,7 @@
 <p>def toggle_camera(self):<br>        …</p>
 <p>def closeEvent(self, event):<br>        …<br>继承自 QWidget：<strong>init</strong> 方法：加载 UI 连接按钮的点击事件<br>openfile方法：打开文件选择界面<br>process_image 方法：对用户选择的图像文件进行目标检测，将检测结果显示在界面上，并更新统计信息。<br>process_video 方法：停止之前的视频处理线程和摄像头线程，创建并启动新的视频处理线程。<br>update_frame方法：接收处理后的帧和统计信息：切换摄像头的启动和停止状态<br>closeEvent 方法：在关闭窗口时停止所有正在运行的线程。</p>
 <p>4.主程序<br>if <strong>name</strong> &#x3D;&#x3D; ‘<strong>main</strong>‘:<br>    app &#x3D; QApplication(sys.argv)<br>    window &#x3D; MainWindow()<br>    window.show()<br>    sys.exit(app.exec())</p>
-<h2 id="五，功能展示"><a href="#五，功能展示" class="headerlink" title="五，功能展示"></a>五，功能展示</h2><p><img src="/../image/11.png" alt="一些文件"></p>
-<p><img src="/../image/12.png" alt="一些文件"></p>
+<h2 id="五，功能展示"><a href="#五，功能展示" class="headerlink" title="五，功能展示"></a>五，功能展示</h2><p><img src="https://blogphotos-1339074592.cos.ap-singapore.myqcloud.com/11.png"><br><img src="https://blogphotos-1339074592.cos.ap-singapore.myqcloud.com/12.png"></p>
 <h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre><code class="import">import warnings
 import cv2
 from PyQt6 import uic
